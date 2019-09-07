@@ -1,0 +1,10 @@
+Version 1.5
+1) Add contributions from the second term in 'A term' expression:
+ \alpha = \frac{}{\omega-\omega_1-i\Gamma} + \frac{}{\omega+\omega_1+i\Gamma}
+
+2) Add overtone contribution from the same vibration mode
+  2*\omega
+
+Version 1.6
+1) Add overtone contribution with mixed vibration modes
+ \omega_i + \omega_j

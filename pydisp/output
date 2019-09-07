@@ -1,0 +1,7 @@
+# --------------------------------------------------------------------------
+# BROADENING: Utility for spectrum line broadening
+# Spectrum data write in gnuplot format.
+#
+#                       H. Ren, Jan 2008
+#  Reversion by H.R. for output formats on Dec 7, 2010 
+# --------------------------------------------------------------------------

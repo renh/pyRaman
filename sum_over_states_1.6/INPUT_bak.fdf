@@ -1,0 +1,9 @@
+
+#FDF: Opened STDIN for input. Unit:  5
+
+fdf-debug              0     # Default value
+NumberOfVibStatesGround                       10
+NumberOfVibStatesExcited                       20
+DisplacementFile     disp.dat                                                                        
+Broadening          100.0000000           cm-1
+# Above item originally: Broadening          100.0000000     cm-1      

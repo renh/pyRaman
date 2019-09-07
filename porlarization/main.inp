@@ -1,0 +1,138 @@
+#================================================================
+# generous parameters for all kinds of calculation
+#================================================================
+# comments start with "#" would be omitted
+#
+# excitation energies and dipoles file
+f_energy_dipole  energies_dipoles.inp
+#
+# displacement file
+f_disp  disp.inp
+#
+# basetime in picosecond
+basetime 100.0
+
+# number of grids for Fourier transform: 
+# nt = nomega = 2^num
+num 14
+
+# omega grid interval
+domega 30.0
+
+# dephasing of electronic excited states (cm-1)
+Gamma 100.0
+
+# broadening of vibration excited states (cm-1)
+Gamma_g  10.0
+
+# temperature (1/kT)
+beta 0.005
+
+# highest vibrational excited states considered 
+# |0>, |1>, ..., | vibquanta_max >
+# vibquanta_max + 1 states in total
+vibquanta_max 6
+
+#================================================================
+# parameters for absorption calculation
+#================================================================
+# UV absorption range
+ABS_OmegaL_min  30000  # cm-1
+ABS_OmegaL_max  50000  # cm-1
+ABS_nOmegaL     20001
+
+
+#================================================================
+# parameters for CW Raman calculation
+#================================================================
+# Read previously generated data?
+CW_read_alpha  False
+
+# write CW alpha?
+# this parameter does not affect 2D calculation, where 
+# alpha would be saved eigher as text or as npy data.
+CW_write_alpha False
+
+# calculate 2DCW Raman?
+CW_cal_2DCW   False
+
+# save formatted data (alpha and spectra)?
+CW_save_txt  True
+
+# save unformatted data (alpha and spectra)?
+CW_save_npy True
+
+# detection range and number of grids
+CW_OmegaS_min   600.0
+CW_OmegaS_max   1800.0
+CW_nOmegaS      1201
+
+# Excitation frequency range for 2DCW calculation, and number of grids
+CW_OmegaL_min   30000.  
+CW_OmegaL_max   50000.  
+CW_n_OmegaL     2001
+
+# Excitation frequency for 1DCW calculation
+CW_OmegaL  39839.68
+
+#================================================================
+# pulses used
+#================================================================
+# energies: use excitation energies as incident pulses
+# read    : read pulses from (this) input file.
+PU_pulses  energies
+PU_n_pulses  7
+PU_pulses_list  30000 31000 35000 36000  37000 38000 39000
+
+#================================================================
+# parameters for 1D Stimulated Raman calculation
+#================================================================
+# detection range and number of grids
+PU1D_OmegaS_min   600.0
+PU1D_OmegaS_max   1800.0
+PU1D_nOmegaS      1201
+
+
+#================================================================
+# parameters for 2D Stimulated Raman calculation
+#================================================================
+# read alpha from pre-saved calculation?
+TD_read_alpha  True
+
+TD_Omega1_min  0.
+TD_Omega1_max  1800.
+TD_nOmega1     181
+
+TD_Omega2_min  -1800
+TD_Omega2_max   1800
+TD_nOmega2      361
+
+TD_configuration 227
+
+#================================================================
+# parameters for 2D Stimulated Raman calculation
+#================================================================
+POR1D_OmegaS_min 600.0
+POR1D_OmegaS_max 1800.0
+POR1D_nOmegaS  1201
+
+# pulse directions in two vectors (6 real)
+POR1D_PULSE_VEC  HM
+
+# pulse center freqs, wrt PU_pulses
+POR1D_PULSE_CONF 12
+
+#================================================================
+# parameters for 2D Stimulated Raman calculation
+#================================================================
+POR2D_Omega1_min 600.0
+POR2D_Omega1_max 1800.0
+POR2D_nOmega1 241
+
+POR2D_Omega2_min -1200.0
+POR2D_Omega2_max 1800.0
+POR2D_nOmega2 601
+
+POR2D_PULSE_VEC BBB
+POR2D_PULSE_CONF 123
+

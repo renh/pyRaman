@@ -1,0 +1,11 @@
+# comments start with "#"
+# will automatically collected from Gaussian force/freq calculations.
+# excitation energies in eV, dipoles (with polarizations) in atomic unit.
+# =========================================================
+# eV     dip_x        dip_y      dip_z      |dip|^2    
+# ---------------------------------------------------------
+4.5945   0.2302     -0.2888      1.2589     1.7212
+5.3345  -0.4976     -1.3340      0.5809     2.3646
+5.6341   1.9181     -1.3655      0.2285     5.5959
+5.6883  -0.9231      0.4962     -0.1731     1.1282
+# =========================================================

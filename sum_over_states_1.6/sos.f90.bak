@@ -1,0 +1,98 @@
+program sos
+    use prec
+    use constant
+    implicit none
+
+    integer,parameter :: N_states = 5
+    integer :: N_modes, N_vib
+    real(q),dimension(:,:,:),allocatable :: S
+    complex(q),dimension(:,:,:),allocatable :: alpha
+    real(q),dimension(:),allocatable :: delta, freq
+    integer :: i, j, n, m
+    complex(q),dimension(:),allocatable :: dump
+    real(q),parameter:: gamma_nu = 10.0
+    real(q),dimension(:),allocatable :: factor
+
+    N_modes = 39
+    N_vib = 5
+    allocate(S(N_states,N_states,N_modes))
+    allocate(delta(N_modes))
+    allocate(freq(N_modes))
+    allocate(dump(N_modes))
+    allocate(alpha(N_vib,N_vib,N_modes))
+    allocate(factor(N_modes))
+    S = 0.0_q
+    delta = 0.0_q
+
+    open(101,file='disp.dat')
+    do i = 1, N_modes
+        read(101,*) freq(i), delta(i)
+    enddo
+    close(101)
+    write(6,*) "read delta done"
+
+
+    ! assign values to S matrix
+    S(1,1,:) = exp(-.5_q*delta*delta)
+    do i = 2, N_states
+        S(i,1,:) = delta / (i-1)**.5_q * S(i-1,1,:)
+        S(1,i,:) = (1._q-2._q*mod(i-1,2)) * S(i,1,:)
+    enddo
+    write(6,*) "1st column and row done"
+
+    do n = 2, N_States
+        do m = 2, N_states
+            S(m,n,:) = real((n-1)/m,q)*S(m-1,n-1,:) + delta * &
+        &        1._q/real(m,q)**.5_q * S(m-1,n,:)
+        enddo
+    enddo
+    write(6,*) "S matrix done"
+
+    ! calculate sum over states
+    alpha = 0.0_q
+    do n = 1, N_vib
+        do m = 1, N_vib
+            do i = 1, N_states
+                dump = S(m,i,:)*S(i,n,:) / ((i-n)*freq-ci*gamma_nu)
+                alpha(m,n,:) = alpha(m,n,:) + dump
+            enddo
+        enddo
+    enddo
+    alpha = alpha / WAVNUMTOJ
+    
+!    factor = TPI*TPI/4/0_q/PERMITTIVITY/PERMITTIVITy
+!    factor = factor * 44302.4469514573_q * (44302.4469514573_q-freq)**3._q
+!    factor = factor * (4.649773318754230E-118_q + &
+!    &    7.0_q/45.0_q*2.092397993439404E-117_q)
+    
+
+    do i = 1, N_modes
+!    do n = 1, N_vib
+!        do m = 1, N_vib
+!            if (m /= n) then 
+                write(11,*) abs(alpha(1,2,i))
+!            endif
+!        enddo
+!    enddo
+    enddo
+
+
+    deallocate(S)
+    deallocate(delta)
+    deallocate(freq)
+    deallocate(alpha)
+    deallocate(factor)
+contains
+function factorial(i) result(result_factorial)
+    integer,intent(in) :: i
+    integer(li) :: result_factorial
+    integer :: ind
+
+    result_factorial = 1
+    do ind = 1, i
+        result_factorial = result_factorial * ind
+    enddo
+    return
+end function factorial
+
+end program sos
